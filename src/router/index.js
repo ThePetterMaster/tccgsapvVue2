@@ -1,25 +1,33 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import SelectionSortView from '../views/SelectionSortView.vue'
+import InsertionSortView from '../views/InsertionSortView.vue'
+import BubbleSortView from '../views/BubbleSortView.vue'
+import ShellSortView from '../views/ShellSortView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'SelectionSort',
+    component: SelectionSortView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-    }
-  }
+    path: '/InsertionSort',
+    name: 'InsertionSort',
+    component: InsertionSortView
+  },
+  {
+    path: '/BubbleSort',
+    name: 'BubbleSort',
+    component: BubbleSortView
+  },
+  {
+    path: '/ShellSort',
+    name: 'ShellSortView',
+    component: ShellSortView
+  },
 ]
 
 const router = new VueRouter({
