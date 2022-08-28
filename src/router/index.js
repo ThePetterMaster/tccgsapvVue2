@@ -11,22 +11,26 @@ const routes = [
   {
     path: '/',
     name: 'SelectionSort',
-    component: SelectionSortView
+    component: SelectionSortView,
+    meta: { transition: 'slide-left' },
   },
   {
     path: '/InsertionSort',
     name: 'InsertionSort',
-    component: InsertionSortView
+    component: InsertionSortView,
+    meta: { transition: 'slide-left' },
   },
   {
     path: '/BubbleSort',
     name: 'BubbleSort',
-    component: BubbleSortView
+    component: BubbleSortView,
+    meta: { transition: 'slide-left' },
   },
   {
     path: '/ShellSort',
     name: 'ShellSortView',
-    component: ShellSortView
+    component: ShellSortView,
+    meta: { transition: 'slide-left' },
   },
 ]
 

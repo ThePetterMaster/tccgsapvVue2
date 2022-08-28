@@ -2,7 +2,7 @@
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">
-        <img src="../assets/iconmonstr-sort-25.png" width="70" height="30" class="d-inline-block align-top" alt="">
+        <img src="@/assets/iconmonstr-sort-25.png" width="70" height="30" class="d-inline-block align-top" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,5 +30,7 @@ export default {
 </script>
 
 <style>
-
+img{
+  border-radius: 5%;
+}
 </style>

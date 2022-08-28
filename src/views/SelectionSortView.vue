@@ -1,9 +1,19 @@
 <template>
 <div>
+  
+ 
+    <!-- <ModalConsultaPessoa
+      v-show="isModalVisible"
+      @closeModalCadastro="closeModal"
+    />
+    <div class="modal-backdrop fade show" v-show="isModalVisible"></div> -->
+
+  
   <NavComponente/>
-  <div class="container">
-    <div class="boxcontainer"> 
-      <div v-bind:id=" `box${index}`" class="box" v-for="(elemento, index) in oredenados" :key="index">
+  <transition name="fade">
+  <div  class="container">
+    <div  class="boxcontainer"> 
+      <div  v-bind:id=" `box${index}`" class="box" v-for="(elemento, index) in oredenados" :key="index">
         {{elemento}}
       </div>
       
@@ -13,15 +23,17 @@
       
       
     </div>
-    <div class="imagemContainer">
-      <img src="./sort.png" alt="Selection Sort" width="500" height="500" />
+    <div  class="imagemContainer">
+      <img  src="@/assets/selectionsort.png" alt="Selection Sort" width="500" height="500" />
       <div id="bordacodigo"></div>
     </div>
     <!-- <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/> -->
   </div>
+  </transition>
   
 <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/>
   <!-- <button @click="selectionSort">Ordenar</button> -->
+
   
   
 </div>
@@ -33,22 +45,25 @@
 <script>
 
 import gsap from 'gsap'
+import ModalConsultaPessoa from "../components/Modais/ModalCreateArray.vue"
 import Vue from 'vue'
 
 var tl = gsap.timeline()
 export default {
+  components: {  ModalConsultaPessoa },
   name: 'HomeView',
   data() {
     return {
       larguraDaTela: window.innerWidth,
-  
+      isModalVisible: true,
       elementos:[4,3,2,1],
       oredenados:[1,2,3,4],
+      show:false
       
     };
   },
   mounted() {
-
+    this.show=!this.show
 
     gsap.set("#bordacodigo",{scale: 0}) 
     gsap.set("#i",{scale: 0})
@@ -60,7 +75,15 @@ export default {
     }
   },
   methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+
+    closeModal() {
+      this.isModalVisible = false;
+    },
     selectionSort() { 
+      
       tl.set("#bordacodigo",{scale: 1})
       tl.to( "#bordacodigo", { y:-27*8.5  });
       
@@ -78,7 +101,7 @@ export default {
       var i=0
       var j=i+1  
       for( i = 0; i < n; i++) {  
-        tl.set("#i",{scale: 1})
+
         tl.to( "#bordacodigo", { y:-27*7.5  });
     
   
@@ -89,6 +112,9 @@ export default {
         
           for( j = i+1; j < n; j++){
             tl.to( "#bordacodigo", { y:-27*5.5  });
+            tl.set("#j",{scale: 1})  
+            
+            tl.fromTo( "#j",{ x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j-1)) }, { x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j))  });
 
           
             tl.to( "#bordacodigo", { y:-27*4.5  });
@@ -99,9 +125,7 @@ export default {
 
               }
               tl.to( "#bordacodigo", { y:-27*2.5  });
-            tl.set("#j",{scale: 1})  
-            
-               tl.fromTo( "#j",{ x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j-1)) }, { x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j))  });
+
           }
           tl.to( "#bordacodigo", { y:-27*1.5  });
           tl.to( "#bordacodigo", { y:-27*0.5  });
@@ -274,6 +298,23 @@ export default {
   border-style: solid;
   border-width: 4px;
   opacity:0.5;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.fade-enter-from{
+  opacity: 0;
+} 
+.fade-enter-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 1;
+}
+.fade-enter-active /* .fade-leave-active below version 2.1.8 */ {
+  transition: all 2s ease;
 }
 
 
