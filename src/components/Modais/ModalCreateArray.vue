@@ -20,7 +20,7 @@
       <div class="modal-body">
         <p>Inputs</p>
         <div class="d-flex flex-row justify-content-center">
-          <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  maxlength="1" class="form-control inputs"  v-for="(elemento, index) in array" :key="index">
+          <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  maxlength="1" class="form-control inputs"  v-for="(elemento, index) in array" :key="index" v-model="array[index]">
 
   
         </div>
@@ -33,8 +33,10 @@
 
 
     
-              <input  @click="$emit('closeModalCadastro')" type="submit" class="btn btn-primary" data-toggle="button" value="Fechar"/>
+              <input  @click="fechouModal" type="submit" class="btn btn-primary" data-toggle="button" value="Fechar"/>
             </div>
+            <input  @click="pop" type="submit" class="btn btn-primary" data-toggle="button" value="Pop"/>
+            <input  @click="push" type="submit" class="btn btn-primary" data-toggle="button" value="Push"/>
           </div>
         </div>
       </div>
@@ -54,13 +56,29 @@ export default {
 
   data() {
     return {
-      array:[1,1,1,1,1],
+      array:[4,3,2,1],
     };
   },
 
 
   created() { },
   methods: {
+    pop(){
+      this.array.pop()
+    },
+    push(){
+      this.array.push(undefined)
+    },
+    fechouModal(){
+      //não fnciona menor que 2
+      //não funciona input vazio
+      for(let i=0;i<this.array.length;i++){
+        this.array[i]=Number(this.array[i])
+      }
+      console.log("array do modal "+this.array)
+      this.$emit('closeModalCadastro')
+      this.$emit('mandouArray',this.array)
+    }
 
 
 
