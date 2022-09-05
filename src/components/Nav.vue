@@ -10,9 +10,7 @@
       <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-item nav-link active" to="/">SelectionSort</router-link>
-          <router-link class="nav-item nav-link active" to="/InsertionSort">InsertionSort</router-link>
           <router-link class="nav-item nav-link active" to="/BubbleSort">BubbleSort</router-link>
-          <router-link class="nav-item nav-link active" to="/Shellsort">ShellSort</router-link>
         </div>
       </div>
     </nav> 
