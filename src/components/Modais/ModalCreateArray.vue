@@ -64,10 +64,18 @@ export default {
   created() { },
   methods: {
     pop(){
+      console.log("Antes do pop: "+this.array)
+      console.log("Tamanho antes do pop: "+this.array.length)
       this.array.pop()
+      console.log("Depois do pop: "+this.array)
+      console.log("Tamanho depois do pop: "+this.array.length)
     },
     push(){
+      console.log("Antes do push: "+this.array)
+      console.log("Tamanho antes do push: "+this.array.length)
       this.array.push(undefined)
+      console.log("Depois do push: "+this.array)
+      console.log("Tamanho depois do push: "+this.array.length)
     },
     fechouModal(){
       //não fnciona menor que 2
@@ -76,6 +84,7 @@ export default {
         this.array[i]=Number(this.array[i])
       }
       console.log("array do modal "+this.array)
+      console.log("Tamanho array do modal "+this.array.length)
       this.$emit('closeModalCadastro')
       this.$emit('mandouArray',this.array)
     }

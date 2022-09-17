@@ -20,19 +20,23 @@
       
       <div id="i"><div id="borda"></div>i</div>
       <div id="j"><div id="borda"></div>j</div>
-      <div id="min">min</div>
+      <div id="min">min:</div>
+      <div id="boxmin"></div>
+      <div id="box_i">i:</div>
+      <div id="box_j">j:</div>
+      <div id="valor_i"></div>
+      <div id="valor_j"></div>
       
       
       
     </div>
     <div  class="imagemContainer">
-      <img  src="@/assets/selectionsort.png" alt="Selection Sort" width="500" height="500" />
+      <img  src="@/assets/selectionSortPy.png" alt="Selection Sort" width="500" height="500" />
       <div id="bordacodigo"></div>
     </div>
     <!-- <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/> -->
   </div>
   </transition>
-  
   <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/>
   <input @click="reverter" type="submit" class="btn btn-primary" data-toggle="button" value="Reverter"/>
   <input @click="pausar" type="submit" class="btn btn-primary" data-toggle="button" value="Pausar/Continuar"/>
@@ -77,8 +81,11 @@ export default {
 
     gsap.set("#bordacodigo",{scale: 0}) 
     gsap.set("#i",{scale: 0})
-    gsap.set("#j",{scale: 0})  
-    gsap.set("#min",{scale: 0})  
+    gsap.set("#j",{scale: 0})
+    gsap.set("#box_i",{scale: 0})
+    gsap.set("#box_j",{scale: 0})   
+    gsap.set("#boxmin",{scale: 0})  
+    gsap.set("#min",{scale: 0}) 
 
     // for (var i = 0; i < this.elementos.length; i++) {
     //   gsap.set(`#box${this.oredenados.indexOf(this.elementos[i])}` ,{ x: (i-this.oredenados.indexOf(this.elementos[i]))*100});
@@ -90,17 +97,21 @@ export default {
   },
   methods: {
     mandouArray(array){
-      // console.log("mandou o array")
+      console.log("mandou o array")
+      console.log(array)
+      console.log(array.length)
       if(array.length>=this.elementos.length){
-        // console.log("array>=elementos")
-        // console.log(array)
+        console.log("array>=elementos")
+
         for(let i=0;i<array.length;i++){
-        if(this.elementos[i]!=undefined){
-          this.$set(this.elementos, i, array[i])
-        }else{
-          this.elementos.push( array[i])
-        }
+          if(this.elementos[i]!=undefined){
+            this.$set(this.elementos, i, array[i])
+          }else{
+            this.elementos.push( array[i])
+          }
       }
+      console.log("Depois de array>=elementos "+array)
+
       for(let i=0;i<array.length;i++){
         if(this.elementos[i]!=undefined){
           this.$set(this.oredenados, i, array[i])
@@ -131,7 +142,8 @@ export default {
       // console.log("oredenados "+this.oredenados)
       // console.log("elementos "+this.elementos)
     }
-
+    console.log("elementos "+this.elementos)
+    console.log("oredenados "+this.oredenados)
       
     },
     pausar(){
@@ -151,7 +163,7 @@ export default {
     selectionSort() { 
       
       tl.set("#bordacodigo",{scale: 1})
-      tl.to( "#bordacodigo", { y:-27*8.5  });
+      tl.to( "#bordacodigo", { y:-31.25*7.5  });
       
       
 
@@ -163,62 +175,87 @@ export default {
      
   
       let n = this.elementos.length;
+      tl.to( "#bordacodigo", { y:-31.25*6.5  });
  
       var i=0
       var j=i+1  
       for( i = 0; i < n; i++) {  
-
-        tl.to( "#bordacodigo", { y:-27*7.5  });
+        tl.to( "#bordacodigo", { y:-31.25*5.5  });
     
+        tl.set("#boxmin",{scale: 1})
         tl.set("#min",{scale: 1})
-        tl.set("#min",{y:170})
+        tl.set("#boxmin",{y:180})
+        tl.set("#min",{y:180})
+        tl.set("#boxmin",{x:30})
+        tl.set("#min",{x:-40})
+        gsap.set("#box_i",{scale: 1})
+        gsap.set("#box_j",{scale: 1})
+        gsap.set("#valor_i",{scale: 1})
+        gsap.set("#valor_j",{scale: 1})
+        gsap.set("#box_i",{y: 100})
+        gsap.set("#box_j",{y: 100})
+        gsap.set("#valor_i",{y: 100})
+        gsap.set("#valor_j",{y: 100})
+        gsap.set("#valor_i",{x: -90})
+        gsap.set("#valor_j",{x: 110})
+        gsap.set("#box_i",{x:- 120})
+        gsap.set("#box_j",{x: 80})   
        tl.set("#i",{scale: 1})
        tl.fromTo( "#i",{ x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(i-1)) }, { x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(i))  });
         var min = i;
-        tl.to("#min", {
+        tl.to("#boxmin", {
                   text: {
                       value: String(this.elementos[min]),
                       
                   },
-                  ease: "none"
+                  // ease: "none"
                  });
-        tl.to( "#bordacodigo", { y:-27*6.5  });
+        tl.to("#valor_i", {
+          text: {
+            value: String(i),
+          },
+        });
+        tl.to( "#bordacodigo", { y:-31.25*4.5  });
         
           for( j = i+1; j < n; j++){
-            tl.to( "#bordacodigo", { y:-27*5.5  });
-            tl.set("#j",{scale: 1})  
-            
+            tl.to( "#bordacodigo", { y:-31.25*3.5  });
+             
+        tl.to("#valor_j", {
+          text: {
+            value: String(j),
+          },
+        });
+        tl.set("#j",{scale: 1}) 
             tl.fromTo( "#j",{ x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j-1)) }, { x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j))  });
 
           
-            tl.to( "#bordacodigo", { y:-27*4.5  });
+          
               if(this.elementos[j] < this.elementos[min]) {
-
+                tl.to( "#bordacodigo", { y:-31.25*2.5  });
                   
                   min=j;
                   console.log("Achando o min"+min)
  
-                  tl.to( "#bordacodigo", { y:-27*3.5  });
-                  tl.to("#min", {  
+                  tl.to( "#bordacodigo", { y:-31.25*1.5  });
+                  tl.to("#boxmin", {  
                   text: {
                       value: String(this.elementos[min]),
                       
                   },
-                  ease: "none"
+                  // ease: "none"
                  });
 
               }
-              tl.to( "#bordacodigo", { y:-27*2.5  });
+              
 
           }
-          tl.to( "#bordacodigo", { y:-27*1.5  });
-          tl.to( "#bordacodigo", { y:-27*0.5  });
           if (min != i) {
             
 
-            tl.to( "#bordacodigo", { y:27*0.5  });
-            tl.to( "#bordacodigo", { y:27*1.5  });
-            tl.to( "#bordacodigo", { y:27*2.5  });
+            tl.to( "#bordacodigo", { y:-31.25*0.5  });
+            tl.to( "#bordacodigo", { y:31.25*0.5  });
+            tl.to( "#bordacodigo", { y:31.25*1.5  });
+            tl.to( "#bordacodigo", { y:31.25*2.5  });
             
 
 
@@ -309,7 +346,7 @@ export default {
           
    
           }
-          tl.to( "#bordacodigo", { y:27*3.5  });
+      
           if((this.oredenados.indexOf(this.elementos[min])-i)==0){
               tl.to(`#box${this.oredenados.indexOf(this.elementos[min])}`, { 
                 duration: 0.3,
@@ -328,7 +365,7 @@ export default {
             }
           
       }
-      tl.to( "#bordacodigo", { y:27*4.5  });
+ 
 
         tl.set("#i",{scale: 0})
         tl.set("#j",{scale: 0})
@@ -387,6 +424,31 @@ export default {
   font-size: 50px;
   margin-top:70px
 }
+#box_i{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
+#box_j{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
+#valor_i{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
+#valor_j{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
+#boxmin{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
 #min{
   position:absolute;
   font-size: 50px;
@@ -403,7 +465,7 @@ export default {
 }
 
 #bordacodigo{
-  height: 27px;
+  height: 31.25px;
   width: 500px;
   position:absolute;
   background-color: white;

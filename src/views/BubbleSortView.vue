@@ -20,15 +20,54 @@
         
         <div id="i"><div id="borda"></div>i</div>
         <div id="j"><div id="borda"></div>j</div>
-        <div id="min">min</div>
+        <div id="box_i">i:</div>
+        <div id="box_j">j:</div>
+        <div id="valor_i"></div>
+        <div id="valor_j"></div>
+        <!-- <div id="min">min</div> -->
+        <!-- <b-img :src="require('../assets/selectionsort.png')"></b-img> -->
+        <!-- <img src="@/assets/selectionsort.png" /> -->
+    
         
+    
         
         
       </div>
       <div  class="imagemContainer">
-        <img  src="@/assets/bubbleSort.png" alt="Bubble Sort" width="700" height="500" />
+        <img  src="@/assets/bubbleSortPy.png" alt="Selection Sort" width="500" height="500" />
         <div id="bordacodigo"></div>
       </div>
+
+
+
+
+
+      <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="@/assets/bubbleSort.png" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="@/assets/selectionsort.png" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="@/assets/iconmonstr-sort-25.png" alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <div id="bordacodigo"></div> -->
+      <!-- <div  class="imagemContainer">
+        <img  src="@/assets/bubbleSort.png" alt="Bubble Sort" width="700" height="500" />
+        <div id="bordacodigo"></div>
+      </div> -->
       <!-- <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/> -->
     </div>
     </transition>
@@ -68,7 +107,6 @@
         elementos:[4,3,2,1],
         oredenados:[1,2,3,4],
         show:false,
-        min:undefined
         
       };
     },
@@ -77,8 +115,9 @@
   
       gsap.set("#bordacodigo",{scale: 0}) 
       gsap.set("#i",{scale: 0})
-      gsap.set("#j",{scale: 0})  
-      gsap.set("#min",{scale: 0})  
+      gsap.set("#j",{scale: 0}) 
+      gsap.set("#box_i",{scale: 0})
+      gsap.set("#box_j",{scale: 0})   
   
       // for (var i = 0; i < this.elementos.length; i++) {
       //   gsap.set(`#box${this.oredenados.indexOf(this.elementos[i])}` ,{ x: (i-this.oredenados.indexOf(this.elementos[i]))*100});
@@ -149,19 +188,49 @@
       },
   
       bubbleSort() {
+        tl.set("#bordacodigo",{scale: 1})
+        tl.to( "#bordacodigo", { y:-41.6666666667*5.5  });
+        tl.to( "#bordacodigo", { y:-41.6666666667*4.5  });
         for (var i = 0; i < this.elementos.length; i++) {
           gsap.set(`#box${this.oredenados.indexOf(this.elementos[i])}` ,{ x: (i-this.oredenados.indexOf(this.elementos[i]))*100});
 
         }
         var length = this.elementos.length;  
         for (var i = 0; i < length; i++) { 
+          tl.to( "#bordacodigo", { y:-41.6666666667*3.5  });
           tl.set("#i",{scale: 1})
           tl.fromTo( "#i",{ x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(i-1)) }, { x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(i))  });
+          gsap.set("#box_i",{scale: 1})
+          gsap.set("#box_j",{scale: 1})
+          gsap.set("#valor_i",{scale: 1})
+          gsap.set("#valor_j",{scale: 1})
+          gsap.set("#box_i",{y: 100})
+          gsap.set("#box_j",{y: 100})
+          gsap.set("#valor_i",{y: 100})
+          gsap.set("#valor_j",{y: 100})
+          gsap.set("#valor_i",{x: -90})
+          gsap.set("#valor_j",{x: 110})
+          gsap.set("#box_i",{x:- 120})
+          gsap.set("#box_j",{x: 80}) 
+          tl.to("#valor_i", {
+            text: {
+              value: String(i),
+            },
+          });
           for (var j = 0; j < (length - i -1); j++) { 
+            tl.to( "#bordacodigo", { y:-41.6666666667*2.5  });
             tl.set("#j",{scale: 1})  
             tl.fromTo( "#j",{ x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j-1)) }, { x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j))  });
-
+            tl.to("#valor_j", {
+              text: {
+                value: String(j),
+              },
+            });
             if(this.elementos[j] > this.elementos[j+1]) {
+              tl.to( "#bordacodigo", { y:-41.6666666667*1.5  });
+              tl.to( "#bordacodigo", { y:-41.6666666667*0.5  });
+              tl.to( "#bordacodigo", { y:41.6666666667*0.5  });
+              tl.to( "#bordacodigo", { y:41.6666666667*1.5  });
               tl.to(`#box${this.oredenados.indexOf(this.elementos[j])}`, { 
                 duration: 0.3,
                 backgroundColor: 'orange',
@@ -234,6 +303,7 @@
               });
         tl.set("#i",{scale: 0})
         tl.set("#j",{scale: 0})
+        tl.set("#bordacodigo",{scale: 0})
       }
   
     }
@@ -288,11 +358,26 @@
     font-size: 50px;
     margin-top:70px
   }
-  #min{
-    position:absolute;
-    font-size: 50px;
-    margin-top:70px
-  }
+  #box_i{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
+#box_j{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
+#valor_i{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
+#valor_j{
+  position:absolute;
+  font-size: 50px;
+  margin-top:70px
+}
   #borda{
     background-color: white;
     border-style: solid;
@@ -304,7 +389,7 @@
   }
   
   #bordacodigo{
-    height: 27px;
+    height: 41.6666666667px;
     width: 500px;
     position:absolute;
     background-color: white;
