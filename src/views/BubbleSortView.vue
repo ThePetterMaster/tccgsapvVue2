@@ -11,6 +11,7 @@
   
     
     <NavComponente/>
+    <h1>Atualize a página(F5) caso enfrente problemas</h1>
     <transition name="fade">
     <div  class="container">
       <div  class="boxcontainer"> 
@@ -72,7 +73,7 @@
     </div>
     </transition>
     
-    <input @click="bubbleSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/>
+    <input  v-show="!ordenou" @click="bubbleSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/>
     <input @click="reverter" type="submit" class="btn btn-primary" data-toggle="button" value="Reverter"/>
     <input @click="pausar" type="submit" class="btn btn-primary" data-toggle="button" value="Pausar/Continuar"/>
     <!-- <button @click="selectionSort">Ordenar</button> -->
@@ -107,6 +108,7 @@
         elementos:[4,3,2,1],
         oredenados:[1,2,3,4],
         show:false,
+        ordenou:false
         
       };
     },
@@ -188,6 +190,7 @@
       },
   
       bubbleSort() {
+        this.ordenou=true
         tl.set("#bordacodigo",{scale: 1})
         tl.to( "#bordacodigo", { y:-41.6666666667*5.5  });
         tl.to( "#bordacodigo", { y:-41.6666666667*4.5  });
@@ -321,7 +324,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 120px;
+    font-size: 80px;
     position: static;
     border-radius: 25px;
   }

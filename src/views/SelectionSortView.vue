@@ -9,10 +9,12 @@
     />
     <div class="modal-backdrop fade show" v-show="isModalVisible"></div> 
 
-  
+    
   <NavComponente/>
+  <h1>Atualize a página(F5) caso enfrente problemas</h1>
   <transition name="fade">
   <div  class="container">
+   
     <div  class="boxcontainer"> 
       <div  v-bind:id=" `box${index}`" class="box" v-for="(elemento, index) in elementos" :key="index" >
         {{elemento}}
@@ -37,7 +39,7 @@
     <!-- <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/> -->
   </div>
   </transition>
-  <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/>
+  <input v-show="!ordenou" @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/>
   <input @click="reverter" type="submit" class="btn btn-primary" data-toggle="button" value="Reverter"/>
   <input @click="pausar" type="submit" class="btn btn-primary" data-toggle="button" value="Pausar/Continuar"/>
   <!-- <button @click="selectionSort">Ordenar</button> -->
@@ -72,7 +74,8 @@ export default {
       elementos:[4,3,2,1],
       oredenados:[1,2,3,4],
       show:false,
-      min:undefined
+      min:undefined,
+      ordenou:false
       
     };
   },
@@ -161,6 +164,7 @@ export default {
     },
 
     selectionSort() { 
+      this.ordenou=true
       
       tl.set("#bordacodigo",{scale: 1})
       tl.to( "#bordacodigo", { y:-31.25*7.5  });
@@ -217,7 +221,7 @@ export default {
         });
         tl.to( "#bordacodigo", { y:-31.25*4.5  });
         
-          for( j = i+1; j < n; j++){
+          for( j = i; j < n; j++){
             tl.to( "#bordacodigo", { y:-31.25*3.5  });
              
         tl.to("#valor_j", {
@@ -387,7 +391,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 120px;
+  font-size: 80px;
   position: static;
   border-radius: 25px;
 }

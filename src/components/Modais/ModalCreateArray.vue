@@ -11,8 +11,11 @@
               card-item-result
             ">
             <h5 class="modal-title mx-auto my-0">Diga os elementos do vetor</h5>
-          </div>
 
+          </div>
+            <h7>Não coloque valores repetidos</h7>
+            <h7>Não coloque um vetor menor que 3</h7>
+            <h7>Não coloque valor vazio no vetor</h7>
           <div class="table-responsive max-height-content-detail-big p-2">
 
 
@@ -20,7 +23,7 @@
       <div class="modal-body">
         <p>Inputs</p>
         <div class="d-flex flex-row justify-content-center">
-          <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  maxlength="1" class="form-control inputs"  v-for="(elemento, index) in array" :key="index" v-model="array[index]">
+          <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  maxlength="2" class="form-control inputs"  v-for="(elemento, index) in array" :key="index" v-model="array[index]">
 
   
         </div>
@@ -96,7 +99,7 @@ export default {
 </script>
 <style scoped>
 .inputs{
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
 }
 </style>
