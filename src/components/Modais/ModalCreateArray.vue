@@ -14,7 +14,6 @@
 
           </div>
             <h7>Não coloque valores repetidos</h7>
-            <h7>Não coloque valor vazio no vetor</h7>
           <div class="table-responsive max-height-content-detail-big p-2">
 
 
