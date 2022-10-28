@@ -39,9 +39,9 @@
     <!-- <input @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/> -->
   </div>
   </transition>
-  <input v-show="!ordenou" @click="selectionSort" type="submit" class="btn btn-primary" data-toggle="button" value="Ordenar"/>
-  <input @click="reverter" type="submit" class="btn btn-primary" data-toggle="button" value="Reverter"/>
-  <input @click="pausar" type="submit" class="btn btn-primary" data-toggle="button" value="Pausar/Continuar"/>
+  <input v-show="!ordenou" @click="selectionSort" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Ordenar"/>
+  <input @click="reverter" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Reverter"/>
+  <input @click="pausar" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Pausar/Continuar"/>
   <!-- <button @click="selectionSort">Ordenar</button> -->
 
   
@@ -66,7 +66,7 @@ var tl = gsap.timeline()
 
 export default {
   components: {  ModalConsultaPessoa },
-  name: 'HomeView',
+  name: 'SelectionSortView',
   data() {
     return {
       larguraDaTela: window.innerWidth,
@@ -99,54 +99,37 @@ export default {
 
   },
   methods: {
+    sort(items) { 
+        let n = items.length;    
+        for(let i = 0; i < n; i++) {
+            let min = i;
+            for(let j = i+1; j < n; j++){
+                if(items[j] < items[min]) {
+                    min=j; 
+                }
+            }
+            if (min != i) {
+                let tmp = items[i]; 
+                items[i] = items[min];
+                items[min] = tmp;      
+            }
+        }
+    },
     mandouArray(array){
       console.log("mandou o array")
       console.log(array)
       console.log(array.length)
-      if(array.length>=this.elementos.length){
-        console.log("array>=elementos")
-
-        for(let i=0;i<array.length;i++){
-          if(this.elementos[i]!=undefined){
-            this.$set(this.elementos, i, array[i])
-          }else{
-            this.elementos.push( array[i])
-          }
-      }
-      console.log("Depois de array>=elementos "+array)
-
+      this.elementos=[]
+      this.oredenados=[]
       for(let i=0;i<array.length;i++){
-        if(this.elementos[i]!=undefined){
-          this.$set(this.oredenados, i, array[i])
-        }else{
-          this.oredenados.push()
-        }
+        this.$set(this.elementos, i, array[i])
+        this.oredenados.push(array[i])
       }
-      this.oredenados.sort()
-      // console.log("oredenados "+this.oredenados)
-      // console.log("elementos "+this.elementos)
-    }else{
-      // console.log("array<elementos")
-      for(let i=0;i<this.elementos.length;i++){
-        if(array[i]!=undefined){
-          this.$set(this.elementos, i, array[i])
-        }else{
-          this.elementos.pop()
-        }
-      }
-      for(let i=0;i<this.oredenados.length;i++){
-        if(array[i]!=undefined){
-          this.$set(this.oredenados, i, array[i])
-        }else{
-          this.oredenados.pop()
-        }
-      }
-      this.oredenados.sort()
-      // console.log("oredenados "+this.oredenados)
-      // console.log("elementos "+this.elementos)
-    }
-    console.log("elementos "+this.elementos)
-    console.log("oredenados "+this.oredenados)
+      console.log("elementos "+this.elementos)
+      console.log("oredenados "+this.oredenados)
+      this.sort(this.oredenados)
+      console.log("elementos "+this.elementos)
+      console.log("oredenados "+this.oredenados)
       
     },
     pausar(){
@@ -154,6 +137,9 @@ export default {
     },
     reverter(){
       tl.reversed(!tl.reversed())
+      if(tl.paused()){
+          tl.paused(!tl.paused())
+        }
     },
     showModal() {
       this.isModalVisible = true;
@@ -233,9 +219,9 @@ export default {
             tl.fromTo( "#j",{ x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j-1)) }, { x:( -0.5*(this.elementos.length-1)*document.querySelector(".box").offsetWidth+document.querySelector(".box").offsetWidth*(j))  });
 
           
-          
+              tl.to( "#bordacodigo", { y:-31.25*2.5  });
               if(this.elementos[j] < this.elementos[min]) {
-                tl.to( "#bordacodigo", { y:-31.25*2.5  });
+                
                   
                   min=j;
                   console.log("Achando o min"+min)
@@ -253,11 +239,13 @@ export default {
               
 
           }
+          tl.to( "#bordacodigo", { y:-31.25*0.5  });
+          tl.to( "#bordacodigo", { y:31.25*0.5  });
           if (min != i) {
             
 
-            tl.to( "#bordacodigo", { y:-31.25*0.5  });
-            tl.to( "#bordacodigo", { y:31.25*0.5  });
+           
+            
             tl.to( "#bordacodigo", { y:31.25*1.5  });
             tl.to( "#bordacodigo", { y:31.25*2.5  });
             

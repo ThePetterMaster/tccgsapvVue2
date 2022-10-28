@@ -14,7 +14,6 @@
 
           </div>
             <h7>Não coloque valores repetidos</h7>
-            <h7>Não coloque um vetor menor que 3</h7>
             <h7>Não coloque valor vazio no vetor</h7>
           <div class="table-responsive max-height-content-detail-big p-2">
 
@@ -23,7 +22,7 @@
       <div class="modal-body">
         <p>Inputs</p>
         <div class="d-flex flex-row justify-content-center">
-          <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  maxlength="2" class="form-control inputs"  v-for="(elemento, index) in array" :key="index" v-model="array[index]">
+          <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  maxlength="2" class="form-control inputs mr-1"  v-for="(elemento, index) in array" :key="index" v-model="array[index]">
 
   
         </div>
@@ -38,8 +37,8 @@
     
               <input  @click="fechouModal" type="submit" class="btn btn-primary" data-toggle="button" value="Fechar"/>
             </div>
-            <input  @click="pop" type="submit" class="btn btn-primary" data-toggle="button" value="Pop"/>
-            <input  @click="push" type="submit" class="btn btn-primary" data-toggle="button" value="Push"/>
+            <input  @click="pop" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Retirar"/>
+            <input  @click="push" type="submit" class="btn btn-primary" data-toggle="button" value="Adicionar"/>
           </div>
         </div>
       </div>
@@ -66,30 +65,47 @@ export default {
 
   created() { },
   methods: {
+    findUndefined(array){
+      for(let i=0;i<array.length;i++){
+        if(array[i]==undefined){
+          return true
+        }
+      }
+      return false
+    },
     pop(){
       console.log("Antes do pop: "+this.array)
       console.log("Tamanho antes do pop: "+this.array.length)
-      this.array.pop()
+      if(this.array.length>1){
+        this.array.pop()
+      }
       console.log("Depois do pop: "+this.array)
       console.log("Tamanho depois do pop: "+this.array.length)
     },
     push(){
       console.log("Antes do push: "+this.array)
       console.log("Tamanho antes do push: "+this.array.length)
-      this.array.push(undefined)
+      if (this.array.length<7){
+        this.array.push(undefined)
+      }
       console.log("Depois do push: "+this.array)
       console.log("Tamanho depois do push: "+this.array.length)
     },
     fechouModal(){
       //não fnciona menor que 2
       //não funciona input vazio
-      for(let i=0;i<this.array.length;i++){
-        this.array[i]=Number(this.array[i])
+      if(this.findUndefined(this.array)){
+        Toast.fire('Não é premitido campos vazios!!', '', 'error')
+      }else{
+        for(let i=0;i<this.array.length;i++){
+          this.array[i]=Number(this.array[i])
+        }
+        console.log("array do modal "+this.array)
+        console.log("Tamanho array do modal "+this.array.length)
+        this.$emit('closeModalCadastro')
+        this.$emit('mandouArray',this.array)
       }
-      console.log("array do modal "+this.array)
-      console.log("Tamanho array do modal "+this.array.length)
-      this.$emit('closeModalCadastro')
-      this.$emit('mandouArray',this.array)
+
     }
 
 
