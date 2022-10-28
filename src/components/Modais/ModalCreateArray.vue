@@ -94,7 +94,7 @@ export default {
       //não fnciona menor que 2
       //não funciona input vazio
       if(this.findUndefined(this.array)){
-        Toast.fire('Não é premitido campos vazios!!', '', 'error')
+        Toast.fire('Não é permitido campos vazios!!', '', 'error')
       }else{
         for(let i=0;i<this.array.length;i++){
           this.array[i]=Number(this.array[i])
