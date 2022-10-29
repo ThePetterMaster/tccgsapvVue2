@@ -13,6 +13,7 @@
             <h5 class="modal-title mx-auto my-0">Diga os elementos do vetor</h5>
 
           </div>
+
           <div class="table-responsive max-height-content-detail-big p-2">
 
 
@@ -35,7 +36,7 @@
     
               <input  @click="fechouModal" type="submit" class="btn btn-primary" data-toggle="button" value="Fechar"/>
             </div>
-            <input  @click="pop" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Retirar"/>
+            <input  @click="pop" type="submit" class="btn btn-primary mr-2 fa-solid fa-plus" data-toggle="button" value="Retirar"> 
             <input  @click="push" type="submit" class="btn btn-primary" data-toggle="button" value="Adicionar"/>
           </div>
         </div>
