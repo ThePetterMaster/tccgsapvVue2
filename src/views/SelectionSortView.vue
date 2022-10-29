@@ -40,8 +40,8 @@
   </div>
   </transition>
   <input v-show="!ordenou" @click="selectionSort" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Ordenar"/>
-  <input @click="reverter" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Reverter"/>
-  <input @click="pausar" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Pausar/Continuar"/>
+  <input v-show="ordenou" @click="reverter" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Reverter"/>
+  <input v-show="ordenou" @click="pausar" type="submit" class="btn btn-primary mr-2" data-toggle="button" value="Pausar/Continuar"/>
   <!-- <button @click="selectionSort">Ordenar</button> -->
 
   
