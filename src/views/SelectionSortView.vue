@@ -240,10 +240,10 @@ export default {
 
           }
           tl.to( "#bordacodigo", { y:-31.25*0.5  });
-          tl.to( "#bordacodigo", { y:31.25*0.5  });
+          
           if (min != i) {
             
-
+            tl.to( "#bordacodigo", { y:31.25*0.5  });
            
             
             tl.to( "#bordacodigo", { y:31.25*1.5  });

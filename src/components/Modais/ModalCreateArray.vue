@@ -13,7 +13,6 @@
             <h5 class="modal-title mx-auto my-0">Diga os elementos do vetor</h5>
 
           </div>
-            <h7>Não coloque valores repetidos</h7>
           <div class="table-responsive max-height-content-detail-big p-2">
 
 
@@ -72,6 +71,16 @@ export default {
       }
       return false
     },
+    findRepetitions(array){
+      for(let i=0;i<array.length-1;i++){
+        for(let j=i+1;j<array.length;j++){
+          if(array[i]==array[j]){
+          return true
+          }    
+        }
+      }
+      return false
+    },
     pop(){
       console.log("Antes do pop: "+this.array)
       console.log("Tamanho antes do pop: "+this.array.length)
@@ -91,11 +100,15 @@ export default {
       console.log("Tamanho depois do push: "+this.array.length)
     },
     fechouModal(){
-      //não fnciona menor que 2
-      //não funciona input vazio
-      if(this.findUndefined(this.array)){
+      console.log("entou no fechouModal ")
+      if(this.findRepetitions(this.array)){
+        console.log("entou no findRepetitions ")
+        Toast.fire('Não é permitido números repetidos!!', '', 'error')
+      }if(this.findUndefined(this.array)){
+        console.log("entou no findUndefined ")
         Toast.fire('Não é permitido campos vazios!!', '', 'error')
-      }else{
+      }if(!this.findUndefined(this.array)&&!this.findRepetitions(this.array)){
+        console.log("entou nos 2 ")
         for(let i=0;i<this.array.length;i++){
           this.array[i]=Number(this.array[i])
         }
